@@ -1,0 +1,18 @@
+# Rules
+To win you should reach 500 score
+each ball bounce on player are save in a var tmpScore
+when you goal the adverse camp, you obtain tmpScore
+
+# Controls
+P1 (on right) :
+↑ ↓ → ← : to control your player
+
+P2 (on left) :
+WASD or ZQSD : to control your player
+
+Miscelanous :
+X                 : to reset game
+Escape            : to stop game
+NUMPAD9 - NUMPAD3 : increase Master  volume
+NUMPAD8 - NUMPAD2 : increase Music   volume
+NUMPAD7 - NUMPAD1 : increase SoundFX volume

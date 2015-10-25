@@ -1,0 +1,50 @@
+- [X] Acceleration progressive de la balle a chaque rebond contre une raquette
+- [X] Gestion de l'angle de rebond
+- [X] Ajout d'un Player VS IA (à ameliorer)
+- [X] Menu Highscore
+
+# Affichage des scores
+- [X] un score par player
+- [X] chaque rebond met +1 au score temporaire
+- [X] quand la balle meurt dans un camp, le player adverse reçois le score temporaire
+- [X] le premier à 500 gagne
+
+# Visuel
+- [X] animation avec changement de couleur (genre epileptique) de la balle à chaque rebond.
+- [X] plus la balle va vite, plus la balle se scale et change de couleur
+- [X] des particules
+    - chaques rebond genère 10 à 20 particules à l'emplacement du rebond (pas de la balle)
+    dure (10 - 20) frame
+    - chaque particule est un Sprite rangé dans le dossier "Particules" qui (de façon aléatoire à chaque frame) :
+      - se scale entre 0.125 et 0.75 (pendant ce temps le scale de la balle varie entre 0.25 et 1)
+      - tourne sur lui meme (0, 2*PI)
+      - change de couleur (0 - 255, r - v - b)
+      - opacité degressive.
+      - part dans une direction
+       - [X] balle -> rebond
+       - //? rebond -> balle
+       - //? aléatoire
+
+## Détail
+- [X] gérer un peu mieux l'angle de rebond de la balle
+- [X] empêcher des plages d'angle pour la direction de départ
+
+## Gameplay
+- [X] gravité random à chaque balle
+- [X] controle horizontale des raquettes avec un bloqueur de position en X
+    - P1 ! > x = -5
+    - P2 ! < x =  5
+
+## Sons
+- [X] Bruitage
+- [X] Musique
+- [X] Class SoundController + behavior
+
+## Menu
+- [X] StartMenu (choisi le mode de jeu)
+- [X] EndMenu (affiche le score Final, gagnant perdant, retour au menu start)
+
+## Controles :
+- [ ] personalisable
+- [ ] menu
+- [ ] controle du son
