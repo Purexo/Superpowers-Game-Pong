@@ -1,0 +1,419 @@
+{
+  "history": [
+    {
+      "timestamp": 1426429477136,
+      "author": "Matspyder",
+      "text": "Tu veut un peu d'aide ?"
+    },
+    {
+      "timestamp": 1426429966877,
+      "author": "Nopoza",
+      "text": "Mmmh ... Je ne sais pas, j'ai parfois quelques bugs inconnus mais bon, la méthode (Delete tout et recommence) fonctionne pour le moment."
+    },
+    {
+      "timestamp": 1426430804811,
+      "author": "Nopoza",
+      "text": "M'enfin, je veux bien de l'aide pour la baballe et les collisions"
+    },
+    {
+      "timestamp": 1426431099583,
+      "author": "Matspyder",
+      "text": "Pour ton histoire de bug avec les behaviors je l'ai réglée, c'est un problème de hiérarchie des fichiers"
+    },
+    {
+      "timestamp": 1426678593480,
+      "author": "Nopoza",
+      "text": "Enorme manque de temps, donc n'hésitez pas à avancer tout seul sur le PONG si vous voulez. "
+    },
+    {
+      "timestamp": 1426730325595,
+      "author": "Purexo2",
+      "text": "On a taffé sur votre projet. on a simplifié les graphisme\n1. pour reprendre vraiment le look original\n2. pour pas s'emmerder avec les collisions"
+    },
+    {
+      "timestamp": 1426768863822,
+      "author": "bilou",
+      "text": "c'est ce que je te disais, les sprites sont pas centrés"
+    },
+    {
+      "timestamp": 1426779786780,
+      "author": "Nopoza",
+      "text": "Génial, j'ai rapidement testé. Bravo pour les collisions"
+    },
+    {
+      "timestamp": 1426779792499,
+      "author": "Nopoza",
+      "text": "Je regarde le code ce soir"
+    },
+    {
+      "timestamp": 1426779792569,
+      "author": "Nopoza",
+      "text": ""
+    },
+    {
+      "timestamp": 1426879629674,
+      "author": "Anata",
+      "text": "un chouilla plus rpide pur la balle et c'est nickel ^^"
+    },
+    {
+      "timestamp": 1426879645505,
+      "author": "Purexo1",
+      "text": "c'est random au debut"
+    },
+    {
+      "timestamp": 1426879654927,
+      "author": "Purexo1",
+      "text": "0.04 - 0.06"
+    },
+    {
+      "timestamp": 1426879677145,
+      "author": "Anata",
+      "text": "vitesse d'augmentation par collision"
+    },
+    {
+      "timestamp": 1426879688543,
+      "author": "Anata",
+      "text": "ca monte pas assez vite a mon gout :)"
+    },
+    {
+      "timestamp": 1426879692441,
+      "author": "Purexo1",
+      "text": "ok"
+    },
+    {
+      "timestamp": 1426881800135,
+      "author": "Purexo1",
+      "text": "Bon, Le pong est fonctionel"
+    },
+    {
+      "timestamp": 1426887657654,
+      "author": "Nopoza",
+      "text": "Haha, je suis un peu dégoûté. J'ai pas eut le temps de me retourner que tu as déjà tout fait :3"
+    },
+    {
+      "timestamp": 1426887715015,
+      "author": "Purexo1",
+      "text": "bah j'ai taffé deux jours dessus quand meme"
+    },
+    {
+      "timestamp": 1426887731699,
+      "author": "Nopoza",
+      "text": "Ouep, c'est super bien ce que tu as fait ^^"
+    },
+    {
+      "timestamp": 1426888266436,
+      "author": "Purexo1",
+      "text": "Anata, m'a aider aussi, ainsi que Shqiptar"
+    },
+    {
+      "timestamp": 1426993290642,
+      "author": "Purexo1",
+      "text": "j'ai rajouté une trainé a la boule, et aux joueurs"
+    },
+    {
+      "timestamp": 1426993296421,
+      "author": "Purexo1",
+      "text": "avec tout pleins de particules"
+    },
+    {
+      "timestamp": 1426993326972,
+      "author": "Purexo1",
+      "text": "Bonne nuit (a 4h du mat lol)"
+    },
+    {
+      "timestamp": 1427011137765,
+      "author": "Coca",
+      "text": "Yop :D"
+    },
+    {
+      "timestamp": 1427131050760,
+      "author": "Metylene",
+      "text": "C'est normal que la balle ai une gravité beaucoup plus forte vers la gauche ? Ça m'arrive plein de fois qu'elle revienne vers la gauche sans avoir à rebondir sur la barre de droite"
+    },
+    {
+      "timestamp": 1427131063697,
+      "author": "Purexo1",
+      "text": "oui."
+    },
+    {
+      "timestamp": 1427131072991,
+      "author": "Purexo1",
+      "text": "la gravité est random a chaques balle"
+    },
+    {
+      "timestamp": 1427131134791,
+      "author": "Metylene",
+      "text": "Mais sur 2 parties, jamais ce n'est arrivé que ma balle n'ai pas besoin de rebondir sur le pad gauche pour repartir vers la droite"
+    },
+    {
+      "timestamp": 1427131135939,
+      "author": "Purexo1",
+      "text": "c'est gerer avec un random entre -+PI / 4\net une chance sur deux de lui ahjouter PI"
+    },
+    {
+      "timestamp": 1427131212061,
+      "author": "Purexo1",
+      "text": " c'est une coincidence.\ntu peux deplacer a l'horizontale aussi tes raquettes,\na chaques rebond la balle accelere. patience ;-)"
+    },
+    {
+      "timestamp": 1427131230075,
+      "author": "Purexo1",
+      "text": "sachant que les premiers tu peux en faire facile 20 d'un coup"
+    },
+    {
+      "timestamp": 1427131444331,
+      "author": "Metylene",
+      "text": "Ok :)"
+    },
+    {
+      "timestamp": 1427131548960,
+      "author": "Metylene",
+      "text": "ah mais j'avais pas vu le déplacement gauche/droite  !:D"
+    },
+    {
+      "timestamp": 1427131549157,
+      "author": "Metylene",
+      "text": ""
+    },
+    {
+      "timestamp": 1427131728234,
+      "author": "Purexo1",
+      "text": "ça rajoute une toute autre dimension au gameplay ;-)"
+    },
+    {
+      "timestamp": 1427132397473,
+      "author": "Metylene",
+      "text": "On dirait presque du air hockey ^^"
+    },
+    {
+      "timestamp": 1427132467118,
+      "author": "Purexo1",
+      "text": "j'avais pas vu sous cet angle, mais il y a de l'idee"
+    },
+    {
+      "timestamp": 1428098224254,
+      "author": "Metylene",
+      "text": "Tiens il n'y a plus de score ?"
+    },
+    {
+      "timestamp": 1428159624235,
+      "author": "Purexo1",
+      "text": "le plugin de textrenderer dois plus fonctionner"
+    },
+    {
+      "timestamp": 1431899103127,
+      "author": "Purexo",
+      "text": "coucou"
+    },
+    {
+      "timestamp": 1431899124499,
+      "author": "Anata",
+      "text": "1ere fois que j'y vais avec un browser ^^"
+    },
+    {
+      "timestamp": 1431899129342,
+      "author": "Purexo",
+      "text": "xD"
+    },
+    {
+      "timestamp": 1431899146767,
+      "author": "Purexo",
+      "text": "le but c'etait que tu y aille avec Superpowers"
+    },
+    {
+      "timestamp": 1431899164243,
+      "author": "Anata",
+      "text": "et ?"
+    },
+    {
+      "timestamp": 1431899164350,
+      "author": "Purexo",
+      "text": "quand je dit un build c'est vraiment un build ;-) "
+    },
+    {
+      "timestamp": 1431899172258,
+      "author": "Anata",
+      "text": "ah, tu veux un export"
+    },
+    {
+      "timestamp": 1431899179400,
+      "author": "Purexo",
+      "text": "et la fonction d'export est pas dispo sur nav"
+    },
+    {
+      "timestamp": 1431899183844,
+      "author": "Anata",
+      "text": "entre export et build, ca fait deux ^^"
+    },
+    {
+      "timestamp": 1431899211043,
+      "author": "Purexo",
+      "text": "le bouton play j'appelle pas trop ça un build mais bon. "
+    },
+    {
+      "timestamp": 1431899218278,
+      "author": "Purexo",
+      "text": "oui un export please"
+    },
+    {
+      "timestamp": 1431899387680,
+      "author": "Anata",
+      "text": "ca va, y'a pas beaucoup de plugin sur le server de ralm, omg ^^"
+    },
+    {
+      "timestamp": 1431899408487,
+      "author": "Anata",
+      "text": "18 Mo compressé l'export pour un pong, c'est abusé :D"
+    },
+    {
+      "timestamp": 1431899421208,
+      "author": "Purexo",
+      "text": "étant donné que ça fait un moment que je ne suis pas trop les live et les news, une date à été fixé pour l'opensource ? ou aumoins une réduction de la fourchette"
+    },
+    {
+      "timestamp": 1431899434831,
+      "author": "Purexo",
+      "text": "il y a les musiques et les bruitages je te rappelle"
+    },
+    {
+      "timestamp": 1431899449650,
+      "author": "Purexo",
+      "text": "les musiques doivent faire les 3/4 du poids, easy"
+    },
+    {
+      "timestamp": 1431899606356,
+      "author": "Anata",
+      "text": "c'est les plugins qui prennent toute la place"
+    },
+    {
+      "timestamp": 1431899628518,
+      "author": "Anata",
+      "text": "la moitié vient des plugins :)"
+    },
+    {
+      "timestamp": 1431899646522,
+      "author": "Anata",
+      "text": "http://download.anatagawa.fr/pong.rar"
+    },
+    {
+      "timestamp": 1431899647787,
+      "author": "Purexo",
+      "text": "tu es sérieux oO ?"
+    },
+    {
+      "timestamp": 1431899669914,
+      "author": "Purexo",
+      "text": "merci ^^"
+    },
+    {
+      "timestamp": 1431899693950,
+      "author": "Anata",
+      "text": "ben ouai, un export export tous les plugins, meme ceux non utilisé ^^"
+    },
+    {
+      "timestamp": 1431899704229,
+      "author": "Anata",
+      "text": "et y'a la blinde sur le server de ralmn ^^"
+    },
+    {
+      "timestamp": 1431899744052,
+      "author": "Purexo",
+      "text": "ça c'est parce que la fonction d'export est pas opti, mais c'est pas grave."
+    },
+    {
+      "timestamp": 1431899788890,
+      "author": "Anata",
+      "text": "bientot elle le sera"
+    },
+    {
+      "timestamp": 1431899799853,
+      "author": "Anata",
+      "text": "si Elisee fait bien ce qu'il a dit pour ca :D"
+    },
+    {
+      "timestamp": 1431899815228,
+      "author": "Purexo",
+      "text": "du coup, des précisions sur l'opensource ?"
+    },
+    {
+      "timestamp": 1431899825252,
+      "author": "Anata",
+      "text": "aucune pour l'instant"
+    },
+    {
+      "timestamp": 1431899926989,
+      "author": "Purexo",
+      "text": "c'est parti pour 6min d'upload :3"
+    },
+    {
+      "timestamp": 1431899932232,
+      "author": "Purexo",
+      "text": "co de merde :s"
+    },
+    {
+      "timestamp": 1431899944695,
+      "author": "Anata",
+      "text": "^^"
+    },
+    {
+      "timestamp": 1431900025449,
+      "author": "Purexo",
+      "text": "la rar a compressé de 0.3Mo de mieux par rapport à un zip. "
+    },
+    {
+      "timestamp": 1431900048288,
+      "author": "Purexo",
+      "text": "je sais pas si c'est vraiment worth xD"
+    },
+    {
+      "timestamp": 1431900061656,
+      "author": "Anata",
+      "text": "je compresse toujours en rar"
+    },
+    {
+      "timestamp": 1431900071236,
+      "author": "Anata",
+      "text": "apres, on peut toujours utiliser 7zip ^^"
+    },
+    {
+      "timestamp": 1431900280145,
+      "author": "Purexo",
+      "text": "c'est sur. a moins de besoin exceptionel, je te conseil de faire des zip, ça conviens mieux à tout le monde. ;-)\nparce que à moins de devoir vraiment fortement compresser tres fortement des docs avec des fonctionnalité spéciale de winrar ou 7zip, le gain de de place est pas énorme, et tout le monde"
+    },
+    {
+      "timestamp": 1431900293758,
+      "author": "Purexo",
+      "text": "n'a pas forcement envie de devoir dl 7zip ou winrar"
+    },
+    {
+      "timestamp": 1431900304054,
+      "author": "Purexo",
+      "text": "moi je m'en fous je les ai"
+    },
+    {
+      "timestamp": 1431900320398,
+      "author": "Purexo",
+      "text": "du moins 7zip. parceque winrar, eurk"
+    },
+    {
+      "timestamp": 1431901209949,
+      "author": "Purexo",
+      "text": "http://jeux.purexo.eu/pong/"
+    },
+    {
+      "timestamp": 1431901211719,
+      "author": "Purexo",
+      "text": ";-)"
+    },
+    {
+      "timestamp": 1431901216819,
+      "author": "Purexo",
+      "text": "merci beaucoup dude"
+    },
+    {
+      "timestamp": 1431901283953,
+      "author": "Anata",
+      "text": "de rien"
+    }
+  ]
+}

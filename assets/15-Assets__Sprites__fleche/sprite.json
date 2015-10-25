@@ -1,0 +1,28 @@
+{
+  "maps": [
+    "map"
+  ],
+  "filtering": "pixelated",
+  "pixelsPerUnit": 129,
+  "framesPerSecond": 1,
+  "opacity": 1,
+  "alphaTest": 0,
+  "frameOrder": "rows",
+  "grid": {
+    "width": 129,
+    "height": 129
+  },
+  "origin": {
+    "x": 0.5,
+    "y": 0.4775
+  },
+  "animations": [],
+  "advancedTextures": false,
+  "mapSlots": {
+    "map": "map",
+    "light": null,
+    "specular": null,
+    "alpha": null,
+    "normal": null
+  }
+}

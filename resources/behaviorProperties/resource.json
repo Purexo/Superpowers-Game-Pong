@@ -1,0 +1,191 @@
+{
+  "behaviors": {
+    "GlobalVarBehavior": {
+      "scriptId": "41",
+      "parentBehavior": null,
+      "properties": []
+    },
+    "RandomBehavior": {
+      "scriptId": "43",
+      "parentBehavior": null,
+      "properties": []
+    },
+    "PolarCoordinateBehavior": {
+      "scriptId": "46",
+      "parentBehavior": null,
+      "properties": []
+    },
+    "ParticuleBehavior": {
+      "scriptId": "61",
+      "parentBehavior": null,
+      "properties": [
+        {
+          "name": "direction",
+          "type": "Sup.Math.Vector2"
+        }
+      ]
+    },
+    "StartMenuBehavior": {
+      "scriptId": "53",
+      "parentBehavior": null,
+      "properties": []
+    },
+    "PlayerBehavior": {
+      "scriptId": "56",
+      "parentBehavior": null,
+      "properties": [
+        {
+          "name": "speed",
+          "type": "number"
+        }
+      ]
+    },
+    "CPUBehavior": {
+      "scriptId": "57",
+      "parentBehavior": null,
+      "properties": [
+        {
+          "name": "speed",
+          "type": "number"
+        },
+        {
+          "name": "maxSpeed",
+          "type": "number"
+        },
+        {
+          "name": "lastBallPosition",
+          "type": "Sup.Math.Vector3"
+        },
+        {
+          "name": "lastPosition",
+          "type": "Sup.Math.Vector3"
+        },
+        {
+          "name": "lastDistance",
+          "type": "number"
+        },
+        {
+          "name": "nextX",
+          "type": "number"
+        },
+        {
+          "name": "deltaNextY",
+          "type": "number"
+        },
+        {
+          "name": "feinteY",
+          "type": "number"
+        },
+        {
+          "name": "feinteMode",
+          "type": "boolean"
+        }
+      ]
+    },
+    "RaquetteBehavior": {
+      "scriptId": "58",
+      "parentBehavior": null,
+      "properties": [
+        {
+          "name": "isAnimate",
+          "type": "boolean"
+        },
+        {
+          "name": "dtAnimate",
+          "type": "number"
+        },
+        {
+          "name": "dAnimate",
+          "type": "number"
+        }
+      ]
+    },
+    "BallBehavior": {
+      "scriptId": "59",
+      "parentBehavior": null,
+      "properties": [
+        {
+          "name": "increSpeed",
+          "type": "number"
+        },
+        {
+          "name": "startSpeed",
+          "type": "number"
+        },
+        {
+          "name": "startDirection",
+          "type": "Sup.Math.Vector2"
+        },
+        {
+          "name": "isAnimate",
+          "type": "boolean"
+        },
+        {
+          "name": "dAnimate",
+          "type": "number"
+        },
+        {
+          "name": "dtAnimate",
+          "type": "number"
+        },
+        {
+          "name": "scale",
+          "type": "Sup.Math.Vector3"
+        }
+      ]
+    },
+    "SoundControllerBehavior": {
+      "scriptId": "60",
+      "parentBehavior": null,
+      "properties": [
+        {
+          "name": "PLUS_MA",
+          "type": "string"
+        },
+        {
+          "name": "MOINS_MA",
+          "type": "string"
+        },
+        {
+          "name": "PLUS_MU",
+          "type": "string"
+        },
+        {
+          "name": "MOINS_MU",
+          "type": "string"
+        },
+        {
+          "name": "PLUS_BR",
+          "type": "string"
+        },
+        {
+          "name": "MOINS_BR",
+          "type": "string"
+        }
+      ]
+    },
+    "ShadowBehavior": {
+      "scriptId": "62",
+      "parentBehavior": null,
+      "properties": [
+        {
+          "name": "otime",
+          "type": "number"
+        },
+        {
+          "name": "time",
+          "type": "number"
+        },
+        {
+          "name": "omodifier",
+          "type": "number"
+        }
+      ]
+    },
+    "EndMenuBehavior": {
+      "scriptId": "54",
+      "parentBehavior": null,
+      "properties": []
+    }
+  }
+}

@@ -1,0 +1,358 @@
+[
+  {
+    "id": "0",
+    "name": "Assets",
+    "type": null,
+    "children": [
+      {
+        "id": "3",
+        "name": "Sprites",
+        "type": null,
+        "children": [
+          {
+            "id": "5",
+            "name": "Player",
+            "type": "sprite"
+          },
+          {
+            "id": "6",
+            "name": "Ball",
+            "type": "sprite"
+          },
+          {
+            "id": "4",
+            "name": "Particules",
+            "type": null,
+            "children": [
+              {
+                "id": "7",
+                "name": "Square",
+                "type": "sprite"
+              },
+              {
+                "id": "8",
+                "name": "Cercle",
+                "type": "sprite"
+              },
+              {
+                "id": "9",
+                "name": "Coeur",
+                "type": "sprite"
+              },
+              {
+                "id": "10",
+                "name": "Disque",
+                "type": "sprite"
+              },
+              {
+                "id": "11",
+                "name": "Etoile1",
+                "type": "sprite"
+              },
+              {
+                "id": "12",
+                "name": "Etoile2",
+                "type": "sprite"
+              },
+              {
+                "id": "13",
+                "name": "Triangle",
+                "type": "sprite"
+              },
+              {
+                "id": "14",
+                "name": "Gear",
+                "type": "sprite"
+              }
+            ]
+          },
+          {
+            "id": "15",
+            "name": "fleche",
+            "type": "sprite"
+          }
+        ]
+      },
+      {
+        "id": "16",
+        "name": "Scenes",
+        "type": null,
+        "children": [
+          {
+            "id": "19",
+            "name": "Game",
+            "type": "scene"
+          },
+          {
+            "id": "20",
+            "name": "StartMenu",
+            "type": "scene"
+          },
+          {
+            "id": "21",
+            "name": "EndMenu",
+            "type": "scene"
+          }
+        ]
+      },
+      {
+        "id": "17",
+        "name": "Fonts",
+        "type": null,
+        "children": [
+          {
+            "id": "22",
+            "name": "ScoreFont",
+            "type": "font"
+          }
+        ]
+      },
+      {
+        "id": "18",
+        "name": "Sounds",
+        "type": null,
+        "children": [
+          {
+            "id": "23",
+            "name": "Musiques",
+            "type": null,
+            "children": [
+              {
+                "id": "25",
+                "name": "Ping Pong",
+                "type": "sound"
+              },
+              {
+                "id": "26",
+                "name": "505 - Bounce",
+                "type": "sound"
+              },
+              {
+                "id": "27",
+                "name": "505 - Renderer",
+                "type": "sound"
+              },
+              {
+                "id": "28",
+                "name": "505 - Z",
+                "type": "sound"
+              },
+              {
+                "id": "29",
+                "name": "Hardcore Scm - Capacitor chiptune",
+                "type": "sound"
+              }
+            ]
+          },
+          {
+            "id": "24",
+            "name": "Bruitages",
+            "type": null,
+            "children": [
+              {
+                "id": "31",
+                "name": "Mur 1",
+                "type": "sound"
+              },
+              {
+                "id": "32",
+                "name": "Mur 2",
+                "type": "sound"
+              },
+              {
+                "id": "33",
+                "name": "Mur 3",
+                "type": "sound"
+              },
+              {
+                "id": "34",
+                "name": "Raquette 1",
+                "type": "sound"
+              },
+              {
+                "id": "35",
+                "name": "Raquette 2",
+                "type": "sound"
+              },
+              {
+                "id": "36",
+                "name": "Raquette 3",
+                "type": "sound"
+              },
+              {
+                "id": "37",
+                "name": "Fond 1",
+                "type": "sound"
+              },
+              {
+                "id": "38",
+                "name": "Son 8",
+                "type": "sound"
+              },
+              {
+                "id": "39",
+                "name": "Son 9",
+                "type": "sound"
+              },
+              {
+                "id": "40",
+                "name": "Son 10",
+                "type": "sound"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1",
+    "name": "Scripts",
+    "type": null,
+    "children": [
+      {
+        "id": "41",
+        "name": "GlobalVar",
+        "type": "script"
+      },
+      {
+        "id": "42",
+        "name": "Class",
+        "type": null,
+        "children": [
+          {
+            "id": "43",
+            "name": "Random",
+            "type": "script"
+          },
+          {
+            "id": "45",
+            "name": "SoundController",
+            "type": "script"
+          },
+          {
+            "id": "46",
+            "name": "PolarCoordinate",
+            "type": "script"
+          },
+          {
+            "id": "47",
+            "name": "Particule",
+            "type": "script"
+          }
+        ]
+      },
+      {
+        "id": "48",
+        "name": "Functions",
+        "type": "script"
+      },
+      {
+        "id": "49",
+        "name": "Game",
+        "type": "script"
+      },
+      {
+        "id": "50",
+        "name": "Menus",
+        "type": null,
+        "children": [
+          {
+            "id": "51",
+            "name": "StartMenu",
+            "type": "script"
+          },
+          {
+            "id": "52",
+            "name": "EndMenu",
+            "type": "script"
+          },
+          {
+            "id": "53",
+            "name": "StartMenuBehavior",
+            "type": "script"
+          },
+          {
+            "id": "54",
+            "name": "EndMenuBehavior",
+            "type": "script"
+          }
+        ]
+      },
+      {
+        "id": "55",
+        "name": "Behaviors",
+        "type": null,
+        "children": [
+          {
+            "id": "56",
+            "name": "PlayerBehavior",
+            "type": "script"
+          },
+          {
+            "id": "57",
+            "name": "CPUBehavior",
+            "type": "script"
+          },
+          {
+            "id": "58",
+            "name": "RaquetteBehavior",
+            "type": "script"
+          },
+          {
+            "id": "59",
+            "name": "BallBehavior",
+            "type": "script"
+          },
+          {
+            "id": "60",
+            "name": "SoundControllerBehavior",
+            "type": "script"
+          },
+          {
+            "id": "61",
+            "name": "ParticuleBehavior",
+            "type": "script"
+          },
+          {
+            "id": "62",
+            "name": "ShadowBehavior",
+            "type": "script"
+          }
+        ]
+      },
+      {
+        "id": "63",
+        "name": "Main",
+        "type": "script"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Notes",
+    "type": null,
+    "children": [
+      {
+        "id": "64",
+        "name": "HowTo",
+        "type": "fText"
+      },
+      {
+        "id": "65",
+        "name": "Feedback",
+        "type": "fText"
+      },
+      {
+        "id": "66",
+        "name": "Idées",
+        "type": "fText"
+      },
+      {
+        "id": "67",
+        "name": "Credits",
+        "type": "fText"
+      }
+    ]
+  }
+]
