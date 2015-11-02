@@ -1250,41 +1250,40 @@ var ModelRenderer = (function (_super) {
     ModelRenderer.prototype.setModel = function (asset, materialType, customShader) {
         if (this.asset != null)
             this._clearMesh();
-        this.asset = null;
         this.animation = null;
-        if (asset == null || asset.attributes.position == null)
+        if (asset == null || asset.attributes["position"] == null)
             return;
         this.asset = asset;
         if (materialType != null)
             this.materialType = materialType;
         this.updateAnimationsByName();
         var geometry = new THREE.BufferGeometry;
-        if (this.asset.attributes.position != null) {
-            var buffer = new Float32Array(this.asset.attributes.position);
+        if (this.asset.attributes["position"] != null) {
+            var buffer = new Float32Array(this.asset.attributes["position"]);
             geometry.addAttribute("position", new THREE.BufferAttribute(buffer, 3));
         }
-        if (this.asset.attributes.index != null) {
-            var buffer = new Uint16Array(this.asset.attributes.index);
-            geometry.addAttribute("index", new THREE.BufferAttribute(buffer, 1));
+        if (this.asset.attributes["index"] != null) {
+            var buffer = new Uint16Array(this.asset.attributes["index"]);
+            geometry.setIndex(new THREE.BufferAttribute(buffer, 1));
         }
-        if (this.asset.attributes.uv != null) {
-            var buffer = new Float32Array(this.asset.attributes.uv);
+        if (this.asset.attributes["uv"] != null) {
+            var buffer = new Float32Array(this.asset.attributes["uv"]);
             geometry.addAttribute("uv", new THREE.BufferAttribute(buffer, 2));
         }
-        if (this.asset.attributes.normal != null) {
-            var buffer = new Float32Array(this.asset.attributes.normal);
+        if (this.asset.attributes["normal"] != null) {
+            var buffer = new Float32Array(this.asset.attributes["normal"]);
             geometry.addAttribute("normal", new THREE.BufferAttribute(buffer, 3));
         }
-        if (this.asset.attributes.color != null) {
-            var buffer = new Float32Array(this.asset.attributes.color);
+        if (this.asset.attributes["color"] != null) {
+            var buffer = new Float32Array(this.asset.attributes["color"]);
             geometry.addAttribute("color", new THREE.BufferAttribute(buffer, 3));
         }
-        if (this.asset.attributes.skinIndex != null) {
-            var buffer = new Float32Array(this.asset.attributes.skinIndex);
+        if (this.asset.attributes["skinIndex"] != null) {
+            var buffer = new Float32Array(this.asset.attributes["skinIndex"]);
             geometry.addAttribute("skinIndex", new THREE.BufferAttribute(buffer, 4));
         }
-        if (this.asset.attributes.skinWeight != null) {
-            var buffer = new Float32Array(this.asset.attributes.skinWeight);
+        if (this.asset.attributes["skinWeight"] != null) {
+            var buffer = new Float32Array(this.asset.attributes["skinWeight"]);
             geometry.addAttribute("skinWeight", new THREE.BufferAttribute(buffer, 4));
         }
         if (this.materialType === "shader") {
@@ -1294,10 +1293,11 @@ var ModelRenderer = (function (_super) {
             var material;
             if (this.materialType === "basic")
                 material = new THREE.MeshBasicMaterial();
-            else if (this.materialType === "phong")
+            else if (this.materialType === "phong") {
                 material = new THREE.MeshPhongMaterial();
+                material.lightMap = this.asset.textures[this.asset.mapSlots["light"]];
+            }
             material.map = this.asset.textures[this.asset.mapSlots["map"]];
-            material.lightMap = this.asset.textures[this.asset.mapSlots["light"]];
             material.specularMap = this.asset.textures[this.asset.mapSlots["specular"]];
             material.alphaMap = this.asset.textures[this.asset.mapSlots["alpha"]];
             if (this.materialType === "phong")

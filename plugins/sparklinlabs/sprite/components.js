@@ -1229,10 +1229,11 @@ var SpriteRenderer = (function (_super) {
             var material;
             if (this.materialType === "basic")
                 material = new THREE.MeshBasicMaterial();
-            else if (this.materialType === "phong")
+            else if (this.materialType === "phong") {
                 material = new THREE.MeshPhongMaterial();
+                material.lightMap = this.asset.textures[this.asset.mapSlots["light"]];
+            }
             material.map = this.asset.textures[this.asset.mapSlots["map"]];
-            material.lightMap = this.asset.textures[this.asset.mapSlots["light"]];
             material.specularMap = this.asset.textures[this.asset.mapSlots["specular"]];
             material.alphaMap = this.asset.textures[this.asset.mapSlots["alpha"]];
             if (this.materialType === "phong")
@@ -1291,7 +1292,7 @@ var SpriteRenderer = (function (_super) {
         if (this.animationName == null)
             this.setFrame(0);
         else
-            this.updateFrame();
+            this.updateFrame(false);
     };
     SpriteRenderer.prototype.setVerticalFlip = function (verticalFlip) {
         this.verticalFlip = verticalFlip;
@@ -1301,7 +1302,7 @@ var SpriteRenderer = (function (_super) {
         if (this.animationName == null)
             this.setFrame(0);
         else
-            this.updateFrame();
+            this.updateFrame(false);
     };
     SpriteRenderer.prototype.updateAnimationsByName = function () {
         this.animationsByName = {};
@@ -1339,19 +1340,19 @@ var SpriteRenderer = (function (_super) {
         var map = this.material.map;
         var frameX, frameY;
         if (this.asset.frameOrder === "rows") {
-            var framesPerRow = Math.floor(map.image.width / this.asset.grid.width);
+            var framesPerRow = Math.floor(map.size.width / this.asset.grid.width);
             frameX = frame % framesPerRow;
             frameY = Math.floor(frame / framesPerRow);
         }
         else {
-            var framesPerColumn = Math.floor(map.image.height / this.asset.grid.height);
+            var framesPerColumn = Math.floor(map.size.height / this.asset.grid.height);
             frameX = Math.floor(frame / framesPerColumn);
             frameY = frame % framesPerColumn;
         }
-        var left = (frameX * this.asset.grid.width) / map.image.width;
-        var right = ((frameX + 1) * this.asset.grid.width) / map.image.width;
-        var bottom = (map.image.height - (frameY + 1) * this.asset.grid.height) / map.image.height;
-        var top = (map.image.height - frameY * this.asset.grid.height) / map.image.height;
+        var left = (frameX * this.asset.grid.width) / map.size.width;
+        var right = ((frameX + 1) * this.asset.grid.width) / map.size.width;
+        var bottom = (map.size.height - (frameY + 1) * this.asset.grid.height) / map.size.height;
+        var top = (map.size.height - frameY * this.asset.grid.height) / map.size.height;
         var tmp;
         if (this.horizontalFlip) {
             tmp = left;
@@ -1458,8 +1459,10 @@ var SpriteRenderer = (function (_super) {
         }
         return frame;
     };
-    SpriteRenderer.prototype.updateFrame = function () {
-        this.hasFrameBeenUpdated = true;
+    SpriteRenderer.prototype.updateFrame = function (flagFrameUpdated) {
+        if (flagFrameUpdated === void 0) { flagFrameUpdated = true; }
+        if (flagFrameUpdated)
+            this.hasFrameBeenUpdated = true;
         var frame = this.computeAbsoluteFrameIndex();
         if (frame > this.animation.endFrameIndex) {
             if (this.animationLooping) {
@@ -1593,6 +1596,7 @@ var SpriteRendererUpdater = (function () {
             if (image == null) {
                 image = new Image;
                 texture = _this.spriteAsset.pub.textures[key] = new THREE.Texture(image);
+                texture.size = { width: 0, height: 0 };
                 if (_this.spriteAsset.pub.filtering === "pixelated") {
                     texture.magFilter = SupEngine.THREE.NearestFilter;
                     texture.minFilter = SupEngine.THREE.NearestFilter;
@@ -1602,7 +1606,15 @@ var SpriteRendererUpdater = (function () {
                 image.src = _this.mapObjectURLs[key] = URL.createObjectURL(blob);
             }
             if (!image.complete) {
-                image.addEventListener("load", function () { texture.needsUpdate = true; cb(); return; });
+                image.addEventListener("load", function () {
+                    // Three.js might resize our texture to make its dimensions power-of-twos
+                    // because of WebGL limitations (see https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Tutorial/Using_textures_in_WebGL#Non_power-of-two_textures)
+                    // so we store its original, non-power-of-two size for later use
+                    texture.size = { width: image.width, height: image.height };
+                    texture.needsUpdate = true;
+                    cb();
+                    return;
+                });
             }
             else
                 cb();

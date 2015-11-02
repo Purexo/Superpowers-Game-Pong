@@ -4,6 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
+var THREE = SupEngine.THREE;
 var P2Body = (function (_super) {
     __extends(P2Body, _super);
     function P2Body(actor) {
@@ -141,7 +142,6 @@ var P2BodyMarkerUpdater = (function () {
     }
     P2BodyMarkerUpdater.prototype.destroy = function () { };
     P2BodyMarkerUpdater.prototype.config_setProperty = function (path, value) {
-        this.config[path] = value;
         if (path === "width" || path === "height" || (path === "shape" && value === "rectangle")) {
             this.bodyRenderer.setRectangle(this.config.width, this.config.height);
         }

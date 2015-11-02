@@ -55136,7 +55136,7 @@ function compileTypeScript(sourceFileNames, sourceFiles, libSource, compilerOpti
                 file: e.file.fileName,
                 position: e.file.getLineAndCharacterOfPosition(e.start),
                 length: e.length,
-                message: e.messageText
+                message: ts.flattenDiagnosticMessageText(e.messageText, "\n")
             };
         }),
         program: program, typeChecker: typeChecker, script: script, sourceMaps: sourceMaps, files: files

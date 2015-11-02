@@ -55,55 +55,37 @@ function createShaderMaterial(asset, textures, geometry, options) {
         }
         uniforms[uniform.name] = { type: uniform.type, value: value };
     }
-    var attributes = {};
     for (var _b = 0, _c = asset.attributes; _b < _c.length; _b++) {
         var attribute = _c[_b];
-        attributes[attribute.name] = { type: attribute.type };
         var values = [];
         var itemSize = void 0;
         switch (attribute.type) {
             case "f":
                 itemSize = 1;
-                for (var v = 0; v < geometry.getAttribute("position").length / 3; v++) {
-                    for (var i = 0; i < itemSize; i++)
-                        values.push(Math.random());
-                }
                 break;
             case "c":
                 itemSize = 3;
-                for (var v = 0; v < geometry.getAttribute("position").length / 3; v++) {
-                    for (var i = 0; i < itemSize; i++)
-                        values.push(Math.random());
-                }
                 break;
             case "v2":
                 itemSize = 2;
-                for (var v = 0; v < geometry.getAttribute("position").length / 3; v++) {
-                    for (var i = 0; i < itemSize; i++)
-                        values.push(Math.random());
-                }
                 break;
             case "v3":
                 itemSize = 3;
-                for (var v = 0; v < geometry.getAttribute("position").length / 3; v++) {
-                    for (var i = 0; i < itemSize; i++)
-                        values.push(Math.random());
-                }
                 break;
             case "v4":
                 itemSize = 4;
-                for (var v = 0; v < geometry.getAttribute("position").length / 3; v++) {
-                    for (var i = 0; i < itemSize; i++)
-                        values.push(Math.random());
-                }
                 break;
+        }
+        for (var v = 0; v < geometry.getAttribute("position").length / 3; v++) {
+            for (var i = 0; i < itemSize; i++)
+                values.push(Math.random());
         }
         geometry.addAttribute(attribute.name, new THREE.BufferAttribute(new Float32Array(values), itemSize));
     }
     var vertexShader = replaceShaderChunk(options.useDraft ? asset.vertexShader.draft : asset.vertexShader.text);
     var fragmentShader = replaceShaderChunk(options.useDraft ? asset.fragmentShader.draft : asset.fragmentShader.text);
     return new THREE.ShaderMaterial({
-        uniforms: uniforms, attributes: attributes,
+        uniforms: uniforms,
         vertexShader: vertexShader, fragmentShader: fragmentShader,
         transparent: true,
         lights: asset.useLightUniforms

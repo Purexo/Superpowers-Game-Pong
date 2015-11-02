@@ -1,66 +1,22 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-<head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Pong</title>
-        <style type="text/css">
-                * {
-                        padding: 0px;
-                        margin: 0px;
-                        border: none;
-                }
-                body {
-                        position: absolute;
-                        top: 0px;
-                        left: 0px;
-                        right: 0px;
-                        bottom: 0px;
-                }
-                iframe {
-                        top: 0px;
-                        bottom: 0px;
-                }
-                p {
-                        text-align: center;
-                        white-space: pre-line;
-                }
-        </style>
-</head>
-<body>
-        <iframe src="player/index.html" height="100%" width="100%"></iframe>
-        <footer>
-                <p>
-                        <a href="https://purexo.eu/">Mon site web</a>
-                        Plus d'informations sur <a href="http://fr.reddit.com/r/superpowers_fr/comments/36b2zo/mon_pong_3/">Reddit</a>
-                        Controle du Son :
-                            Master Volume :
-                                Plus : NUMPAD9
-                                Moins : NUMPAD3
-                            Musique Volume :
-                                Plus : NUMPAD8
-                                Moins : NUMPAD2
-                            Bruitage Volume :
-                                Plus : NUMPAD7
-                                Moins : NUMPAD1
-
-                        ------------------------
-
-                        Jeux sous licence <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC-BY-NC-SA 3.0</a>
-                        En gros, vous etes libre d'y jouer, partager, adapter le jeu.
-                        Tant que n'en faites pas une utilisation commerciale (sauf autorisation de ma part)
-                        Que vous me créditez
-                        Et que vous partagez sous les mêmes termes (c'est surtout pour que le NC passe pas à la trappe ça ;-) ).
-
-                        ------------------------
-
-                        Crédits :
-                        - Bruitages :
-                        http://www.universal-soundbank.com/sons-vintages-pong.htm
-
-                        - Musiques :
-                        https://www.jamendo.com/fr/track/1196231/capacitor-chip-tune - (hardcore scm)
-                        https://www.jamendo.com/fr/artist/462499/505 (Bounce, Render, Z)
-                </p>
-        </footer>
-</body>
+	<head>
+		<link rel="stylesheet" href="player/index.css">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	</head>
+	
+	<body>
+		<canvas tabindex="-1"></canvas>
+		<div id="loading">
+			<a href="https://sparklinlabs.com/" target="_blank">
+				<img src="player/images/superpowers-splash.svg" draggable="false">
+				<progress max="100" value="0"></progress>
+			</a>
+		</div>
+		<script src="api/SupAPI.js"></script>
+		<script src="core/SupCore.js"></script>
+		<script src="system/SupEngine.js"></script>
+		<script src="system/SupRuntime.js"></script>
+		<script src="player/index.js"></script>
+	</body>
 </html>

@@ -19,7 +19,7 @@ var CameraMarker = (function (_super) {
         var geometry = new THREE.Geometry();
         for (var i = 0; i < 24; i++)
             geometry.vertices.push(new THREE.Vector3(0, 0, 0));
-        this.line = new THREE.Line(geometry, new THREE.LineBasicMaterial({ color: 0xffffff, opacity: 0.5, transparent: true }), THREE.LinePieces);
+        this.line = new THREE.LineSegments(geometry, new THREE.LineBasicMaterial({ color: 0xffffff, opacity: 0.5, transparent: true }));
         this.actor.threeObject.add(this.line);
         this.line.updateMatrixWorld(false);
     }

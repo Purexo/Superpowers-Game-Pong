@@ -33,8 +33,7 @@ var Light = (function (_super) {
         this.shadowCameraRight = 100;
         this.shadowCameraTop = 100;
         this.shadowCameraBottom = -100;
-        this.actor.gameInstance.threeRenderer.shadowMapEnabled = true;
-        this.actor.gameInstance.threeRenderer.shadowMapType = THREE.BasicShadowMap;
+        this.actor.gameInstance.threeRenderer.shadowMap.enabled = true;
     }
     Light.prototype.setType = function (type) {
         if (this.light != null)
@@ -337,8 +336,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = LightMarker;
 
 },{"./Light":2}],4:[function(require,module,exports){
+var THREE = SupEngine.THREE;
 var LightUpdater = (function () {
-    function LightUpdater(client, light, config) {
+    function LightUpdater(projectClient, light, config) {
+        this.lightSettingsSubscriber = {
+            onResourceReceived: this._onLightResourceRecevied.bind(this),
+            onResourceEdited: this._onLightResourceEdited.bind(this)
+        };
+        this.projectClient = projectClient;
         this.light = light;
         this.light.color = parseInt(config.color, 16);
         this.light.intensity = config.intensity;
@@ -358,8 +363,11 @@ var LightUpdater = (function () {
         this.light.shadowCameraTop = config.shadowCameraSize.top;
         this.light.shadowCameraBottom = config.shadowCameraSize.bottom;
         this.light.setType(config.type);
+        this.projectClient.subResource("lightSettings", this.lightSettingsSubscriber);
     }
-    LightUpdater.prototype.destroy = function () { };
+    LightUpdater.prototype.destroy = function () {
+        this.projectClient.unsubResource("lightSettings", this.lightSettingsSubscriber);
+    };
     LightUpdater.prototype.config_setProperty = function (path, value) {
         switch (path) {
             case "type":
@@ -423,6 +431,32 @@ var LightUpdater = (function () {
                 this.light.setShadowCameraSize(null, null, null, value);
                 break;
         }
+    };
+    LightUpdater.prototype._updateLightShadowMap = function () {
+        switch (this.lightSettings.pub.shadowMapType) {
+            case "basic":
+                this.light.actor.gameInstance.threeRenderer.shadowMap.type = THREE.BasicShadowMap;
+                break;
+            case "pcf":
+                this.light.actor.gameInstance.threeRenderer.shadowMap.type = THREE.PCFShadowMap;
+                break;
+            case "pcfSoft":
+                this.light.actor.gameInstance.threeRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
+                break;
+        }
+        this.light.actor.gameInstance.threeScene.traverse(function (object) {
+            var material = object.material;
+            if (material != null)
+                material.needsUpdate = true;
+        });
+    };
+    LightUpdater.prototype._onLightResourceRecevied = function (resourceId, resource) {
+        this.lightSettings = resource;
+        this._updateLightShadowMap();
+    };
+    LightUpdater.prototype._onLightResourceEdited = function (resourceId, command, propertyName) {
+        if (command === "setProperty" && propertyName === "shadowMapType")
+            this._updateLightShadowMap();
     };
     return LightUpdater;
 })();

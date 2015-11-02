@@ -54,16 +54,12 @@ var ArcadePhysics2D;
         }
     }
     function checkTileMap(body1, body2, options) {
-        var top = false;
-        var bottom = false;
-        var right = false;
-        var left = false;
         function checkX() {
             var x = (body1.deltaX() < 0) ?
                 Math.floor((body1.position.x - body2.position.x - body1.width / 2) / body2.mapToSceneFactor.x) :
                 Math.floor((body1.position.x - body2.position.x + body1.width / 2 - epsilon) / body2.mapToSceneFactor.x);
-            var y = body1.position.y - body2.position.y - body1.height / 2;
-            var testedHeight = body1.height - epsilon;
+            var y = body1.position.y - body2.position.y - body1.height / 2 + epsilon;
+            var testedHeight = body1.height - 3 * epsilon;
             var totalPoints = Math.ceil(testedHeight / body2.mapToSceneFactor.y);
             for (var point = 0; point <= totalPoints; point++) {
                 for (var _i = 0, _a = body2.layersIndex; _i < _a.length; _i++) {
@@ -79,13 +75,13 @@ var ArcadePhysics2D;
                     body1.velocity.x = -body1.velocity.x * body1.bounceX;
                     if (body1.deltaX() < 0) {
                         if (options.moveBody)
-                            body1.position.x = (x + 1 + epsilon) * body2.mapToSceneFactor.x + body2.position.x + body1.width / 2;
-                        left = true;
+                            body1.position.x = (x + 1) * body2.mapToSceneFactor.x + body2.position.x + body1.width / 2;
+                        body1.touches.left = true;
                     }
                     else {
                         if (options.moveBody)
-                            body1.position.x = (x - epsilon) * body2.mapToSceneFactor.x + body2.position.x - body1.width / 2;
-                        right = true;
+                            body1.position.x = (x) * body2.mapToSceneFactor.x + body2.position.x - body1.width / 2 + epsilon;
+                        body1.touches.right = true;
                     }
                     return true;
                 }
@@ -93,11 +89,11 @@ var ArcadePhysics2D;
             return false;
         }
         function checkY() {
-            var x = body1.position.x - body2.position.x - body1.width / 2;
+            var x = body1.position.x - body2.position.x - body1.width / 2 + epsilon;
             var y = (body1.deltaY() < 0) ?
                 Math.floor((body1.position.y - body2.position.y - body1.height / 2) / body2.mapToSceneFactor.y) :
                 Math.floor((body1.position.y - body2.position.y + body1.height / 2 - epsilon) / body2.mapToSceneFactor.y);
-            var testedWidth = body1.width - epsilon;
+            var testedWidth = body1.width - 3 * epsilon;
             var totalPoints = Math.ceil(testedWidth / body2.mapToSceneFactor.x);
             for (var point = 0; point <= totalPoints; point++) {
                 for (var _i = 0, _a = body2.layersIndex; _i < _a.length; _i++) {
@@ -113,56 +109,27 @@ var ArcadePhysics2D;
                     body1.velocity.y = -body1.velocity.y * body1.bounceY;
                     if (body1.deltaY() < 0) {
                         if (options.moveBody)
-                            body1.position.y = (y + 1 + epsilon) * body2.mapToSceneFactor.y + body2.position.y + body1.height / 2;
-                        bottom = true;
+                            body1.position.y = (y + 1) * body2.mapToSceneFactor.y + body2.position.y + body1.height / 2;
+                        body1.touches.bottom = true;
                     }
                     else {
                         if (options.moveBody)
-                            body1.position.y = (y - epsilon) * body2.mapToSceneFactor.y + body2.position.y - body1.height / 2;
-                        top = true;
+                            body1.position.y = (y) * body2.mapToSceneFactor.y + body2.position.y - body1.height / 2 + epsilon;
+                        body1.touches.top = true;
                     }
                     return true;
                 }
             }
             return false;
         }
+        var x = body1.position.x;
+        body1.position.x = body1.previousPosition.x;
         var gotCollision = false;
-        if (Math.abs(ArcadePhysics2D.gravity.y) > Math.abs(ArcadePhysics2D.gravity.x) || Math.abs(body1.deltaY()) >= Math.abs(body1.deltaX())) {
-            var yPosition = body1.position.y;
-            var ySpeed = body1.velocity.y;
-            if (checkY())
-                gotCollision = true;
-            if (checkX()) {
-                gotCollision = true;
-                body1.position.y = yPosition;
-                body1.velocity.y = ySpeed;
-                top = false;
-                bottom = false;
-                checkY();
-            }
-        }
-        else {
-            var xPosition = body1.position.x;
-            var xSpeed = body1.velocity.x;
-            if (checkX())
-                gotCollision = true;
-            if (checkY()) {
-                gotCollision = true;
-                body1.position.x = xPosition;
-                body1.velocity.x = xSpeed;
-                right = false;
-                left = false;
-                checkX();
-            }
-        }
-        if (top)
-            body1.touches.top = true;
-        if (bottom)
-            body1.touches.bottom = true;
-        if (right)
-            body1.touches.right = true;
-        if (left)
-            body1.touches.left = true;
+        if (checkY())
+            gotCollision = true;
+        body1.position.x = x;
+        if (checkX())
+            gotCollision = true;
         return gotCollision;
     }
     function collides(body1, bodies) {
@@ -224,6 +191,7 @@ var ArcadeBody2D = (function (_super) {
         this.bounceX = 0;
         this.bounceY = 0;
         this.layersIndex = [];
+        this.customGravity = { x: null, y: null };
         this.touches = { top: false, bottom: false, right: false, left: false };
         SupEngine.ArcadePhysics2D.allBodies.push(this);
     }
@@ -279,10 +247,10 @@ var ArcadeBody2D = (function (_super) {
         this.previousPosition.copy(this.position);
         if (!this.movable || !this.enabled)
             return;
-        this.velocity.x += SupEngine.ArcadePhysics2D.gravity.x;
+        this.velocity.x += this.customGravity.x != null ? this.customGravity.x : SupEngine.ArcadePhysics2D.gravity.x;
         this.velocity.x *= this.velocityMultiplier.x;
         this.velocity.x = Math.min(Math.max(this.velocity.x, this.velocityMin.x), this.velocityMax.x);
-        this.velocity.y += SupEngine.ArcadePhysics2D.gravity.y;
+        this.velocity.y += this.customGravity.y != null ? this.customGravity.y : SupEngine.ArcadePhysics2D.gravity.y;
         this.velocity.y *= this.velocityMultiplier.y;
         this.velocity.y = Math.min(Math.max(this.velocity.y, this.velocityMin.y), this.velocityMax.y);
         this.position.add(this.velocity);
@@ -388,7 +356,6 @@ var ArcadeBody2DUpdater = (function () {
     }
     ArcadeBody2DUpdater.prototype.destroy = function () { };
     ArcadeBody2DUpdater.prototype.config_setProperty = function (path, value) {
-        this.config[path] = value;
         if (path === "width" || path === "height")
             this.bodyRenderer.setBox(this.config.width, this.config.height);
         if (path === "offset.x" || path === "offset.y")

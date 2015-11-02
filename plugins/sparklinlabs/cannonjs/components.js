@@ -24,9 +24,22 @@ var CannonBody = (function (_super) {
     CannonBody.prototype.setup = function (config) {
         this.mass = config.mass != null ? config.mass : 0;
         this.fixedRotation = config.fixedRotation != null ? config.fixedRotation : false;
-        this.offsetX = config.offsetX != null ? config.offsetX : 0;
-        this.offsetY = config.offsetY != null ? config.offsetY : 0;
-        this.offsetZ = config.offsetZ != null ? config.offsetZ : 0;
+        // NOTE: config.offset was introduced in Superpowers 0.14
+        // to merge config.offsetX, .offsetY and .offsetZ
+        if (config.offset != null) {
+            this.offset = {
+                x: config.offset.x,
+                y: config.offset.y,
+                z: config.offset.z
+            };
+        }
+        else {
+            this.offset = {
+                x: config.offsetX != null ? config.offsetX : 0,
+                y: config.offsetY != null ? config.offsetY : 0,
+                z: config.offsetZ != null ? config.offsetZ : 0
+            };
+        }
         this.actor.getGlobalPosition(this.actorPosition);
         this.actor.getGlobalOrientation(this.actorOrientation);
         this.body.mass = this.mass;
@@ -37,10 +50,23 @@ var CannonBody = (function (_super) {
         this.shape = config.shape;
         switch (this.shape) {
             case "box":
-                this.halfWidth = config.halfWidth != null ? config.halfWidth : 0.5;
-                this.halfHeight = config.halfHeight != null ? config.halfHeight : 0.5;
-                this.halfDepth = config.halfDepth != null ? config.halfDepth : 0.5;
-                this.body.addShape(new window.CANNON.Box(new window.CANNON.Vec3(this.halfWidth, this.halfHeight, this.halfDepth)));
+                // NOTE: config.halfSize was introduced in Superpowers 0.14
+                // to merge config.halfWidth, .halfHeight and .halfDepth
+                if (config.halfSize != null) {
+                    this.halfSize = {
+                        x: config.halfSize.x,
+                        y: config.halfSize.y,
+                        z: config.halfSize.z
+                    };
+                }
+                else {
+                    this.halfSize = {
+                        x: config.halfWidth != null ? config.halfWidth : 0.5,
+                        y: config.halfHeight != null ? config.halfHeight : 0.5,
+                        z: config.halfDepth != null ? config.halfDepth : 0.5
+                    };
+                }
+                this.body.addShape(new window.CANNON.Box(new window.CANNON.Vec3().copy(this.halfSize)));
                 break;
             case "sphere":
                 this.radius = config.radius != null ? config.radius : 1;
@@ -53,7 +79,7 @@ var CannonBody = (function (_super) {
                 break;
         }
         this.body.position.set(this.actorPosition.x, this.actorPosition.y, this.actorPosition.z);
-        this.body.shapeOffsets[0].set(this.offsetX, this.offsetY, this.offsetZ);
+        this.body.shapeOffsets[0].copy(this.offset);
         this.body.quaternion.set(this.actorOrientation.x, this.actorOrientation.y, this.actorOrientation.z, this.actorOrientation.w);
     };
     CannonBody.prototype.update = function () {
@@ -87,10 +113,10 @@ var CannonBodyMarker = (function (_super) {
     }
     CannonBodyMarker.prototype.setIsLayerActive = function (active) { if (this.mesh != null)
         this.mesh.visible = active; };
-    CannonBodyMarker.prototype.setBox = function (size) {
+    CannonBodyMarker.prototype.setBox = function (halfSize) {
         if (this.mesh != null)
             this._clearRenderer();
-        var geometry = new THREE.BoxGeometry(size.halfWidth * 2, size.halfHeight * 2, size.halfDepth * 2);
+        var geometry = new THREE.BoxGeometry(halfSize.x * 2, halfSize.y * 2, halfSize.z * 2);
         var material = new THREE.MeshBasicMaterial({ wireframe: true, color: 0xf459e4, transparent: true, opacity: 0.2 });
         this.mesh = new THREE.Mesh(geometry, material);
         this.actor.threeObject.add(this.mesh);
@@ -116,9 +142,7 @@ var CannonBodyMarker = (function (_super) {
         this.mesh.updateMatrixWorld(false);
     };
     CannonBodyMarker.prototype.setOffset = function (offset) {
-        this.mesh.position.setX(offset.x);
-        this.mesh.position.setY(offset.y);
-        this.mesh.position.setZ(offset.z);
+        this.mesh.position.copy(offset);
         this.mesh.updateMatrixWorld(false);
     };
     CannonBodyMarker.prototype._clearRenderer = function () {
@@ -148,11 +172,7 @@ var CannonBodyMarkerUpdater = (function () {
         this.config = config;
         switch (this.config.shape) {
             case "box":
-                this.bodyRenderer.setBox({
-                    halfWidth: this.config.halfWidth,
-                    halfHeight: this.config.halfHeight,
-                    halfDepth: this.config.halfDepth
-                });
+                this.bodyRenderer.setBox(this.config.halfSize);
                 break;
             case "sphere":
                 this.bodyRenderer.setSphere(this.config.radius);
@@ -161,28 +181,24 @@ var CannonBodyMarkerUpdater = (function () {
                 this.bodyRenderer.setCylinder(this.config.radius, this.config.height);
                 break;
         }
-        this.bodyRenderer.setOffset({ x: this.config.offsetX, y: this.config.offsetY, z: this.config.offsetZ });
+        this.bodyRenderer.setOffset(this.config.offset);
     }
     CannonBodyMarkerUpdater.prototype.destroy = function () { };
     CannonBodyMarkerUpdater.prototype.config_setProperty = function (path, value) {
-        this.config[path] = value;
-        if (["halfWidth", "halfHeight", "halfDepth"].indexOf(path) !== -1 || (path === "shape" && value === "box")) {
-            this.bodyRenderer.setBox({
-                halfWidth: this.config.halfWidth,
-                halfHeight: this.config.halfHeight,
-                halfDepth: this.config.halfDepth
-            });
-            this.bodyRenderer.setOffset({ x: this.config.offsetX, y: this.config.offsetY, z: this.config.offsetZ });
+        if (path.indexOf("halfSize") !== -1 || (path === "shape" && value === "box")) {
+            this.bodyRenderer.setBox(this.config.halfSize);
+            this.bodyRenderer.setOffset(this.config.offset);
         }
-        if (["offsetX", "offsetY", "offsetZ"].indexOf(path) !== -1)
-            this.bodyRenderer.setOffset({ x: this.config.offsetX, y: this.config.offsetY, z: this.config.offsetZ });
+        if (path.indexOf("offset") !== -1) {
+            this.bodyRenderer.setOffset(this.config.offset);
+        }
         if ((path === "radius" && this.config.shape === "cylinder") || (path === "shape" && value === "cylinder") || path === "height") {
             this.bodyRenderer.setCylinder(this.config.radius, this.config.height);
-            this.bodyRenderer.setOffset({ x: this.config.offsetX, y: this.config.offsetY, z: this.config.offsetZ });
+            this.bodyRenderer.setOffset(this.config.offset);
         }
         if ((path === "radius" && this.config.shape === "sphere") || (path === "shape" && value === "sphere")) {
             this.bodyRenderer.setSphere(this.config.radius);
-            this.bodyRenderer.setOffset({ x: this.config.offsetX, y: this.config.offsetY, z: this.config.offsetZ });
+            this.bodyRenderer.setOffset(this.config.offset);
         }
     };
     return CannonBodyMarkerUpdater;
